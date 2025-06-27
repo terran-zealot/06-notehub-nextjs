@@ -1,47 +1,19 @@
-// app/notes/page.tsx
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import Notes from './Notes.client';
+import { fetchNotes } from '@/lib/api';
 
-// "use client";
+export default async function NotesPage() {
+  const queryClient = new QueryClient();
 
-// import { useState } from "react";
-// import NoteList from "../../components/noteList/noteList";
-// import { getNotes, Note } from "@/lib/api";
-
-// const Notes = () => {
-//   const [notes, setNotes] = useState<Note[]>([]);
-
-//   const handleClick = async () => {
-//     const response = await getNotes();
-//     if (response?.notes) {
-//       setNotes(response.notes);
-//     }
-//   };
-
-//   return (
-//     <section>
-//       <h1>Notes List</h1>
-//       <button onClick={handleClick}>Get my notes</button>
-//       {notes.length > 0 && <NoteList notes={notes} />}
-//     </section>
-//   );
-// }
-
-// export default Notes;
-
-
-// app/notes/page.tsx
-
-import NoteList from "../../components/noteList/noteList";
-import { getNotes } from "@/lib/api";
-
-const Notes = async () => {
-  const response = await getNotes();
+  // Попереднє завантаження першої сторінки з порожнім пошуком
+  await queryClient.prefetchQuery({
+    queryKey: ['notes', 1, ''],
+    queryFn: () => fetchNotes({ page: 1, search: '', perPage: 12 }),
+  });
 
   return (
-    <section>
-      <h1>Notes List</h1>
-      {response?.notes?.length > 0 && <NoteList notes={response.notes} />}
-    </section>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Notes />
+    </HydrationBoundary>
   );
 }
-
-export default Notes;

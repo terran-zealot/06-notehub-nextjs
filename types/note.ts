@@ -1,41 +1,5 @@
-
 import axios, {type AxiosResponse } from 'axios';
-
-
-
-export type Note = {
-  id: number;
-  title: string;
-  content: string;
-  categoryId: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
-};
-
-export type NoteListResponse = {
-  notes: Note[];
-  total: number;
-};
-
-axios.defaults.baseURL = "https://next-docs-api.onrender.com";
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export const getNotes = async () => {
-  await delay(2000);
-  const res = await axios.get<NoteListResponse>('/notes');
-  return res.data;
-};
-
-
-export const getSingleNote = async (id: string) => {
-    const res = await axios.get<Note>(`/notes/${id}`);
-    return res.data;
-};
-  
-
+import { type Note } from '../lib/api';
 
 const BASE_URL = 'https://notehub-public.goit.study/api/notes';
 const BEARER_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -54,7 +18,6 @@ export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
   page: number;
-  tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
 export interface CreateNoteParams {
