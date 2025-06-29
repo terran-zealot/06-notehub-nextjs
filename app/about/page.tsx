@@ -1,4 +1,4 @@
-// app/notes/page.tsx
+
 import type { Metadata } from "next";
 
 

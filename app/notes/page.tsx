@@ -5,7 +5,7 @@ import { fetchNotes } from '@/lib/api';
 export default async function NotesPage() {
   const queryClient = new QueryClient();
 
-  // Попереднє завантаження першої сторінки з порожнім пошуком
+
   await queryClient.prefetchQuery({
     queryKey: ['notes', 1, ''],
     queryFn: () => fetchNotes({ page: 1, search: '', perPage: 12 }),

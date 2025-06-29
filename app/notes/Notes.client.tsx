@@ -7,7 +7,7 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import css from './Notes.module.css';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
-import NoteList from '../../components/noteList/noteList';
+import NoteList from '../../components/NoteList/noteList';
 import NoteModal from '@/components/NoteModal/NoteModal';
 
 

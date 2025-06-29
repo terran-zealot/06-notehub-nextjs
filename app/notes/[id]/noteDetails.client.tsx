@@ -1,4 +1,4 @@
-// app/notes/[id]/NoteDetails.client.tsx
+
 
 "use client";
 

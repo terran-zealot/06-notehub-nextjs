@@ -1,5 +1,4 @@
 
-
 'use client';
 
 type Props = {
@@ -10,9 +9,9 @@ type Props = {
 const Error = ({ error, reset }: Props) => {
   return (
     <div>
-      <h2>Loading, please wait...</h2>
+      <h2>Помилка при завантаженні</h2>
           <p>{error.message}</p>
-          <button onClick={reset}>Retry</button>
+          <button onClick={reset}>Спробувати знову</button>
     </div>
   );
 }

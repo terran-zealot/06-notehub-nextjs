@@ -1,4 +1,3 @@
-// app/notes/[id]/page.tsx
 
 import {
     QueryClient,
@@ -6,7 +5,7 @@ import {
     dehydrate,
   } from "@tanstack/react-query";
   import { getSingleNote } from "@/lib/api";
-  import NoteDetailsClient from "./noteDetails.client";
+  import NoteDetailsClient from "../Notes.client";
   
   type Props = {
     params: Promise<{ id: string }>;
