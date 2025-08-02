@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import css from './Notes.module.css';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
-import NoteList from '@/components/NoteList/NoteList';
+import NoteList from '../../components/NoteList/NoteList';
 import NoteModal from '@/components/NoteModal/NoteModal';
 
 import { fetchNotes } from '@/lib/api';
