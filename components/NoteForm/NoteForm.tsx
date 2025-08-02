@@ -6,8 +6,7 @@ import { type Note } from '../../types/note';
 import css from './NoteForm.module.css';
 
 interface NoteFormProps {
-  onSuccess: () => void;
-  onCancel: () => void;
+  onClose: () => void;
 }
 
 type CreateNoteParams = {
@@ -16,14 +15,14 @@ type CreateNoteParams = {
   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 };
 
-export default function NoteForm({ onSuccess, onCancel }: NoteFormProps) {
+export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<Note, Error, CreateNoteParams>({
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
-      onSuccess();
+      onClose();
     },
   });
 
@@ -84,7 +83,7 @@ export default function NoteForm({ onSuccess, onCancel }: NoteFormProps) {
           </div>
 
           <div className={css.actions}>
-            <button type="button" className={css.cancelButton} onClick={onCancel}>
+            <button type="button" className={css.cancelButton} onClick={onClose}>
               Cancel
             </button>
             <button type="submit" className={css.submitButton} disabled={isSubmitting}>

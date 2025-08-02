@@ -9,9 +9,10 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import NoteList from '../../components/NoteList/NoteList';
 import NoteModal from '@/components/Modal/Modal';
+import NoteForm from '@/components/NoteForm/NoteForm';
 
 import { fetchNotes } from '@/lib/api';
-import type { FetchNotesResponse } from '@/lib/api';
+import type { FetchNotesResponse } from '../../types/note';
 
 type Props = {
   initialData: FetchNotesResponse;
@@ -34,7 +35,7 @@ export default function Notes({ initialData }: Props) {
     ...(page === 1 && debouncedSearch === '' && initialData
       ? { initialData: initialData as FetchNotesResponse }
       : {}),
-      placeholderData: (previousData) => previousData,
+    placeholderData: (previousData) => previousData,
     staleTime: 1000 * 60 * 60,
   });
 
@@ -59,7 +60,11 @@ export default function Notes({ initialData }: Props) {
         <Pagination currentPage={page} onPageChange={setPage} totalPages={totalPages} />
       )}
 
-      {isModalOpen && <NoteModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <NoteModal onClose={() => setIsModalOpen(false)}>
+          <NoteForm onClose={() => setIsModalOpen(false)} />
+        </NoteModal>
+      )}
     </div>
   );
 }
