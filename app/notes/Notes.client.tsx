@@ -8,7 +8,7 @@ import css from './Notes.module.css';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import NoteList from '../../components/NoteList/NoteList';
-import NoteModal from '@/components/NoteModal/Modal';
+import NoteModal from '@/components/Modal/Modal';
 
 import { fetchNotes } from '@/lib/api';
 import type { FetchNotesResponse } from '@/lib/api';
