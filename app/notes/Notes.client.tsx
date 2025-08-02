@@ -2,19 +2,22 @@
 
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import css from './Notes.module.css';
-import SearchBox from '../../components/SearchBox/SearchBox';
+import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
-import NoteList from '../../components/NoteList/noteList';
+import NoteList from '@/components/NoteList/NoteList'; 
 import NoteModal from '@/components/NoteModal/NoteModal';
 
-
 import { fetchNotes } from '@/lib/api';
-import { type FetchNotesResponse } from '@/lib/api';
+import type { FetchNotesResponse } from '@/lib/api';
 
-export default function Notes() {
+type Props = {
+  initialData: FetchNotesResponse;
+};
+
+export default function Notes({ initialData }: Props) {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,10 +28,14 @@ export default function Notes() {
     setPage(1);
   };
 
-  const { data, isLoading, isError } = useQuery<FetchNotesResponse>({
+  const { data, isLoading, isError } = useQuery<FetchNotesResponse, Error>({
     queryKey: ['notes', page, debouncedSearch],
     queryFn: () => fetchNotes({ page, search: debouncedSearch, perPage: 12 }),
-    placeholderData: keepPreviousData,
+    ...(page === 1 && debouncedSearch === '' && initialData
+      ? { initialData: initialData as FetchNotesResponse }
+      : {}),
+      placeholderData: (previousData) => previousData,
+    staleTime: 1000 * 60 * 60,
   });
 
   if (isLoading) return <p>Loading notes...</p>;

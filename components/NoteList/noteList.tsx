@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteNote } from '../../lib/api';
-import { type Note } from '../../lib/api';
+import { type Note } from '../../types/note';
 import css from './NoteList.module.css';
+// import { string } from 'yup';
 // import { string } from 'yup';
 
 interface NoteListProps {
@@ -18,7 +19,7 @@ export default function NoteList({ notes }: NoteListProps) {
     },
   });
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     mutation.mutate(id);
   };
 

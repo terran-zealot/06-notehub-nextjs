@@ -1,5 +1,5 @@
 import axios, {type AxiosResponse } from 'axios';
-import { type Note } from '../lib/api';
+
 
 const BASE_URL = 'https://notehub-public.goit.study/api/notes';
 const BEARER_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -26,13 +26,16 @@ export interface CreateNoteParams {
   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
-// export async function fetchNotes(params: FetchNotesParams): Promise<FetchNotesResponse> {
-//   const response = await axios.get(BASE_URL, {
-//     headers,
-//     params,
-//   });
-//   return response.data;
-// }
+export type Note = {
+  id: string;
+  title: string;
+  content: string;
+  categoryId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+};
 
 
 export async function createNote(note: CreateNoteParams): Promise<Note> {
@@ -44,12 +47,6 @@ export async function deleteNote(id: number): Promise<Note> {
   const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
   return response.data;
 }
-
-
-
-
-
-
 
 
 

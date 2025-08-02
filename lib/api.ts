@@ -1,18 +1,7 @@
 
 import axios, {type AxiosResponse } from 'axios';
+import { Note } from '../types/note';
 
-
-
-export type Note = {
-  id: number;
-  title: string;
-  content: string;
-  categoryId: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
-};
 
 export type NoteListResponse = {
   notes: Note[];
@@ -63,13 +52,6 @@ export interface CreateNoteParams {
   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
-// export async function fetchNotes(params: FetchNotesParams): Promise<FetchNotesResponse> {
-//   const response = await axios.get(BASE_URL, {
-//     headers,
-//     params,
-//   });
-//   return response.data;
-// }
 
 
 export async function createNote(note: CreateNoteParams): Promise<Note> {
@@ -77,7 +59,7 @@ export async function createNote(note: CreateNoteParams): Promise<Note> {
   return response.data;
 }
 
-export async function deleteNote(id: number): Promise<Note> {
+export async function deleteNote(id: string): Promise<Note> {
   const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
   return response.data;
 }
