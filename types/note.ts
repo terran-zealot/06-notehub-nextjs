@@ -13,14 +13,3 @@ export interface CreateNoteParams {
   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
-export interface FetchNotesParams {
-  page?: number;
-  search?: string;
-  perPage?: number;
-}
-
-export interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-  page: number;
-}
