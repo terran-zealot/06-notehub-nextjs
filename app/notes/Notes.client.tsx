@@ -12,7 +12,7 @@ import NoteModal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
 
 import { fetchNotes } from '@/lib/api';
-import type { FetchNotesResponse } from '../../types/note';
+import type { FetchNotesResponse } from '../../lib/api';
 
 type Props = {
   initialData: FetchNotesResponse;
